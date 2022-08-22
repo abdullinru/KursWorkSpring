@@ -21,9 +21,7 @@ class ExaminerServiceImplTest {
     Question q3 = new Question("Question3", "Answer3");
     Question q4 = new Question("Question4", "Answer4");
     Question q5 = new Question("Question5", "Answer5");
-    Set<Question> questionsExample;
-
-
+    Set<Question> questionsExample1, questionsExample3, questionsExample5;
     @Mock
     private JavaQuestionService javaQuestionServiceMock;
 
@@ -32,17 +30,19 @@ class ExaminerServiceImplTest {
 
     @BeforeEach
     public void init() {
-        Set<Question> questionsExample = new HashSet<>(Set.of(q1, q2, q3, q4, q5));
-        Mockito.when(javaQuestionServiceMock.getAll()).thenReturn(questionsExample);
-        Mockito.when(javaQuestionServiceMock.getRandom())
-                .thenReturn(questionsExample.stream().findAny().orElseThrow());
-
+        questionsExample5 = new HashSet<>(Set.of(q1, q2, q3, q4, q5));
+        Mockito.when(javaQuestionServiceMock.getAll()).thenReturn(questionsExample5);
     }
     @Test
     public void getQuestionsTest() {
-        Assertions.assertThat(questionsExample).containsAll(out.getQuestions(5));
+
+        questionsExample3 = new HashSet<>(Set.of(q1, q2, q3));
+        questionsExample1 = new HashSet<>(Set.of(q1));
+
+        Mockito.when(javaQuestionServiceMock.getRandom())
+                .thenReturn(q1,q2,q3,q4,q5);
+        Assertions.assertThat(questionsExample5).containsAll(out.getQuestions(5));
+        Assertions.assertThat(questionsExample3).containsAll(out.getQuestions(3));
 
     }
-
-
 }
