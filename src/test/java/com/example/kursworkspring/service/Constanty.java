@@ -1,4 +1,4 @@
-package com.example.kursworkspring.Service;
+package com.example.kursworkspring.service;
 
 import com.example.kursworkspring.Question;
 

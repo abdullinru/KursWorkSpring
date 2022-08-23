@@ -1,4 +1,4 @@
-package com.example.kursworkspring.Service;
+package com.example.kursworkspring.service;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

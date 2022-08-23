@@ -1,4 +1,4 @@
-package com.example.kursworkspring.Controller;
+package com.example.kursworkspring.сontroller;
 
 import com.example.kursworkspring.ExaminerService;
 import com.example.kursworkspring.Question;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/exam/get")
+@RequestMapping("/get")
 public class ExamController {
     private final ExaminerService examinerService;
 
@@ -18,8 +18,8 @@ public class ExamController {
         this.examinerService = examinerService;
     }
 
-    @GetMapping
-    public Collection<Question> getQuestions(@RequestParam(name = "amount") Integer amount) {
+    @GetMapping("/{amount}")
+    public Collection<Question> getQuestions(@RequestParam Integer amount) {
 
         return examinerService.getQuestions(amount);
     }

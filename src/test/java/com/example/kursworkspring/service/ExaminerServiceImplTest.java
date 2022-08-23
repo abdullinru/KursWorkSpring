@@ -1,4 +1,4 @@
-package com.example.kursworkspring.Service;
+package com.example.kursworkspring.service;
 
 import com.example.kursworkspring.Question;
 import org.assertj.core.api.Assertions;
@@ -13,7 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class ExaminerServiceImplTest {
     Question q1 = new Question("Question1", "Answer1");
@@ -37,12 +36,14 @@ class ExaminerServiceImplTest {
     public void getQuestionsTest() {
 
         questionsExample3 = new HashSet<>(Set.of(q1, q2, q3));
-        questionsExample1 = new HashSet<>(Set.of(q1));
 
         Mockito.when(javaQuestionServiceMock.getRandom())
-                .thenReturn(q1,q2,q3,q4,q5);
-        Assertions.assertThat(questionsExample5).containsAll(out.getQuestions(5));
-        Assertions.assertThat(questionsExample3).containsAll(out.getQuestions(3));
-
+                .thenReturn(q1,q2,q3,q4,q5,q1,q2,q3,q4,q5);
+        Assertions.assertThat(out.getQuestions(5)).containsExactlyInAnyOrder(q1,q2,q3,q4,q5);
+        Assertions.assertThat(out.getQuestions(3)).containsExactlyInAnyOrder(q1,q2,q3);
+        Assertions.assertThatExceptionOfType(ExceptionIncorrectAmount.class)
+                .isThrownBy(() -> out.getQuestions(-5));
+        Assertions.assertThatExceptionOfType(CollectionLessAmountException.class)
+                .isThrownBy(() -> out.getQuestions(10));
     }
 }
