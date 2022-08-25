@@ -37,7 +37,7 @@ public class ExaminerServiceImpl implements ExaminerService {
         Set<Question> questions = new HashSet<>();
 
         while (questions.size() < amount){
-            int indexRand = random.nextInt(questionServicesList.size());
+            int indexRand = random.nextInt(questionServicesList.size()-1);
             questions.add(questionServicesList.get(indexRand).getRandom());
         }
         return questions;
