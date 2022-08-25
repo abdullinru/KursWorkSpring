@@ -1,6 +1,7 @@
 package com.example.kursworkspring.service;
 
 import com.example.kursworkspring.Question;
+import com.example.kursworkspring.QuestionService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,9 +21,9 @@ class ExaminerServiceImplTest {
     Question q3 = new Question("Question3", "Answer3");
     Question q4 = new Question("Question4", "Answer4");
     Question q5 = new Question("Question5", "Answer5");
-    Set<Question> questionsExample1, questionsExample3, questionsExample5;
+    Set<Question> questionsExample3, questionsExample5;
     @Mock
-    private JavaQuestionService javaQuestionServiceMock;
+    private QuestionService questionServiceMock;
 
     @InjectMocks
     private ExaminerServiceImpl out;
@@ -30,14 +31,14 @@ class ExaminerServiceImplTest {
     @BeforeEach
     public void init() {
         questionsExample5 = new HashSet<>(Set.of(q1, q2, q3, q4, q5));
-        Mockito.when(javaQuestionServiceMock.getAll()).thenReturn(questionsExample5);
+        Mockito.when(questionServiceMock.getAll()).thenReturn(questionsExample5);
     }
     @Test
     public void getQuestionsTest() {
 
         questionsExample3 = new HashSet<>(Set.of(q1, q2, q3));
 
-        Mockito.when(javaQuestionServiceMock.getRandom())
+        Mockito.when(questionServiceMock.getRandom())
                 .thenReturn(q1,q2,q3,q4,q5,q1,q2,q3,q4,q5);
         Assertions.assertThat(out.getQuestions(5)).containsExactlyInAnyOrder(q1,q2,q3,q4,q5);
         Assertions.assertThat(out.getQuestions(3)).containsExactlyInAnyOrder(q1,q2,q3);
