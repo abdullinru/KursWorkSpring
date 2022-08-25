@@ -10,12 +10,12 @@ import java.util.*;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
-    private final QuestionService javaQuestionService;
-    private final QuestionService mathQuestionService;
+    private final JavaQuestionService javaQuestionService;
+    private final MathQuestionService mathQuestionService;
     private final Random random;
 
-    public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService javaQuestionService,
-                               @Qualifier("mathQuestionService") QuestionService mathQuestionService) {
+    public ExaminerServiceImpl( JavaQuestionService javaQuestionService,
+                               MathQuestionService mathQuestionService) {
         this.javaQuestionService = javaQuestionService;
         this.mathQuestionService = mathQuestionService;
         random = new Random();
@@ -37,7 +37,7 @@ public class ExaminerServiceImpl implements ExaminerService {
         Set<Question> questions = new HashSet<>();
 
         while (questions.size() < amount){
-            int indexRand = random.nextInt(questionServicesList.size()-1);
+            int indexRand = random.nextInt(questionServicesList.size());
             questions.add(questionServicesList.get(indexRand).getRandom());
         }
         return questions;
