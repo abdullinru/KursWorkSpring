@@ -10,33 +10,33 @@ import java.util.*;
 @Service
 public class MathQuestionService implements QuestionService {
 
-    private final QuestionRepository questionRepository;
-    private final Random random = new Random();
+//    private final QuestionRepository questionRepository;
+    private final Random random;
 
-    public MathQuestionService(@Qualifier("mathQuestionRepository") QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
+    public MathQuestionService() {
+        random = new Random();
     }
     @Override
     public Question add(String question, String answer) {
-
-        return questionRepository.add(question, answer);
+        throw new ExceptionMetodNotAllowed();
     }
     @Override
     public Question add(Question question) {
-        return questionRepository.add(question);
+        throw new ExceptionMetodNotAllowed();
     }
     @Override
     public Question remove(Question question) {
-        return questionRepository.remove(question);
+        throw new ExceptionMetodNotAllowed();
     }
     @Override
     public Collection<Question> getAll() {
-        return questionRepository.getAll();
+        throw new ExceptionMetodNotAllowed();
     }
     @Override
     public Question getRandom() {
-        Collection<Question> questions = questionRepository.getAll();
-        return new ArrayList<>(questions).get(random.nextInt(questions.size()));
+        String questionRandom = String.format("Question for math %d", random.nextInt(1000));
+        String answerRandom = String.format("Answer %d", random.nextInt(1000));
+        return new Question(questionRandom, answerRandom);
     }
 }
 

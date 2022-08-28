@@ -3,7 +3,6 @@ package com.example.kursworkspring.service;
 import com.example.kursworkspring.ExaminerService;
 import com.example.kursworkspring.Question;
 import com.example.kursworkspring.QuestionService;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -26,14 +25,6 @@ public class ExaminerServiceImpl implements ExaminerService {
             throw new ExceptionIncorrectAmount();
         }
         List<QuestionService> questionServicesList = new ArrayList<>(List.of(javaQuestionService, mathQuestionService));
-        int sizeAllQuestions = 0;
-        for (QuestionService questionService : questionServicesList) {
-            sizeAllQuestions += questionService.getAll().size();
-        }
-
-        if (sizeAllQuestions < amount) {
-            throw new CollectionLessAmountException("В коллекции не хватает вопросов");
-        }
         Set<Question> questions = new HashSet<>();
 
         while (questions.size() < amount){

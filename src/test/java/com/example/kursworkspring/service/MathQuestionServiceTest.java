@@ -1,39 +1,25 @@
 package com.example.kursworkspring.service;
 
 import com.example.kursworkspring.Question;
-import com.example.kursworkspring.repository.QuestionRepository;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import static com.example.kursworkspring.service.Constanty.QUESTION_1;
-import static com.example.kursworkspring.service.Constanty.QUESTION_2;
+import static com.example.kursworkspring.service.Constanty.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-@ExtendWith(MockitoExtension.class)
+
 class MathQuestionServiceTest {
-
-    @Mock
-    private QuestionRepository questionRepositoryMock;
-
-    @InjectMocks
-    private MathQuestionService out;
-
+    MathQuestionService out = new MathQuestionService();
     @Test
     public void getRandomPositiveTest1() {
-        Set<Question> questionExampl = new HashSet<>(Set.of(QUESTION_1, QUESTION_2));
-
-        Mockito.when(questionRepositoryMock.getAll()).thenReturn(questionExampl);
-        out.add(QUESTION_1);
-        out.add(QUESTION_2);
-        assertThat(questionRepositoryMock.getAll()).contains(out.getRandom());
+        assertThat(out.getRandom()).isNotNull();
+        assertThat(out.getRandom()).isOfAnyClassIn(Question.class);
     }
 
+    @Test
+    public void addRemoveGetNegativeTest() {
+        assertThatExceptionOfType(ExceptionMetodNotAllowed.class).isThrownBy(() -> out.add(QUESTION_1));
+        assertThatExceptionOfType(ExceptionMetodNotAllowed.class).isThrownBy(() -> out.add(QUESTION_ONE,ANSWER_ONE));
+        assertThatExceptionOfType(ExceptionMetodNotAllowed.class).isThrownBy(() -> out.remove(QUESTION_1));
+        assertThatExceptionOfType(ExceptionMetodNotAllowed.class).isThrownBy(() -> out.getAll());
+    }
 }
