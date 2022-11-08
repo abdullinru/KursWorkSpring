@@ -13,6 +13,7 @@ public class JavaQuestionService implements QuestionService {
     private final QuestionRepository questionRepository;
     private final Random random = new Random();
 
+    // DA
     public JavaQuestionService(@Qualifier("javaQuestionRepository") QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
@@ -36,10 +37,10 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Collection<Question> getAll() {
-
         return questionRepository.getAll();
     }
 
+    // method gor getting random question from collection of questions for Java
     @Override
     public Question getRandom() {
         Collection<Question> questions = questionRepository.getAll();

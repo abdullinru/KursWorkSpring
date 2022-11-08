@@ -16,20 +16,25 @@ public class MathQuestionController {
 
     private final QuestionService questionService;
 
+    //DA
     public MathQuestionController(@Qualifier("mathQuestionService") QuestionService questionService) {
         this.questionService = questionService;
     }
+    // Method for add question
     @GetMapping("/add")
     public Question addQuestion(@RequestParam(name = "question") String question,
                                 @RequestParam(name = "answer") String answer) {
         return questionService.add(question, answer);
     }
 
+    // Method for remove question
     @GetMapping("/remove")
     public Question removeQuestion(@RequestParam(name = "question") String question,
                                    @RequestParam(name = "answer") String answer) {
         return questionService.remove(new Question(question, answer));
     }
+
+    // Method for getting all questions
     @GetMapping
     public Collection<Question> getQuestions() {
         return questionService.getAll();

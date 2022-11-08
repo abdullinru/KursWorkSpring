@@ -32,6 +32,8 @@ public class MathQuestionService implements QuestionService {
     public Collection<Question> getAll() {
         throw new ExceptionMetodNotAllowed();
     }
+
+    // Methog for generation random question for Math
     @Override
     public Question getRandom() {
         String questionRandom = String.format("Question for math %d", random.nextInt(1000));

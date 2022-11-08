@@ -11,13 +11,14 @@ import java.util.Collection;
 public class ExamController {
     private final ExaminerService examinerService;
 
+    // dependency Enjection
     public ExamController(ExaminerService examinerService) {
         this.examinerService = examinerService;
     }
 
+    // method for getting collection of questions in count of amount
     @GetMapping("/{amount}")
     public Collection<Question> getQuestions(@PathVariable Integer amount) {
-
         return examinerService.getQuestions(amount);
     }
 }

@@ -10,6 +10,8 @@ import javax.annotation.PostConstruct;
 import java.util.*;
 @Repository
 public class JavaQuestionRepository implements QuestionRepository {
+
+    // all questions save in the Set questions
     private final Set<Question> questions;
     private final Random random = new Random();
 
@@ -17,6 +19,7 @@ public class JavaQuestionRepository implements QuestionRepository {
         questions = new HashSet<>();
     }
 
+    // inicialization sample questions for java
     @PostConstruct
     public void init() {
         questions.add(new Question("Java question first", "Answer on Java question first"));
@@ -41,6 +44,7 @@ public class JavaQuestionRepository implements QuestionRepository {
             questions.remove(question);
             return question;
         }
+        // if question is not found in the Set then throw Exception
         throw new QuestionNotFoundException();
     }
 
